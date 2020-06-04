@@ -1,0 +1,51 @@
+{% extends 'usercenter_base.html' %}
+
+<!--crumbs start-->
+{% block bread_crumbs %}
+    <section>
+        <div class="wp">
+            <ul  class="crumbs">
+                <li><a href="{% url 'front:index' %}">首页</a>></li>
+                <li><a href="{% url 'front:info' %}">个人中心</a>></li>
+                <li>我的课程</li>
+            </ul>
+        </div>
+    </section>
+{% endblock %}
+
+{% block right %}
+    <div class="right" >
+		<div class="personal_des Releasecont">
+			<div class="head">
+				<h1>我的课程</h1>
+			</div>
+		</div>
+		<div class="personal_des permessage">
+			<div class="companycenter">
+				<div class="group_list brief">
+                    {% for usercourse in user.usercourse_set.all %}
+                        <div class="module1_5 box">
+                            <a href="{% url 'course:detail' usercourse.course.id %}">
+                                <img width="214" height="190" class="scrollLoading" src="{{ MEDIA_URL }}{{ usercourse.course.cover_image }}"/>
+                            </a>
+                            <div class="des">
+                                <a href="course-detail.html"><h2>{{ usercourse.course.name }}</h2></a>
+                                <span class="fl">课时：<i class="key">{{ usercourse.course.learn_time }}</i></span>
+                                <span class="fr">学习人数：{{ usercourse.course.learn_nums }}</span>
+                            </div>
+                            <div class="bottom">
+                                <span class="fl">{{ usercourse.course.course_org.name }}</span>
+                                <span class="star fr  notlogin" data-favid="15">{{ usercourse.course.collection_nums }}</span>
+                            </div>
+                        </div>
+                    {% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+
+
+
+
